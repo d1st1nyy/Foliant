@@ -1,0 +1,212 @@
+.header {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+}
+.header__logo__title {
+  color: var(--color-text-main);
+}
+.header__logo {
+    color: var(--color-header-primary, var(--color-primary)); 
+    display: flex;
+    align-items: center;
+  a {
+    text-decoration: none;
+  }
+
+  &__img {
+    height: 65px;
+    width: auto;
+  }
+  &__title {
+    margin-left: 12px;
+  }
+}
+.header__search {
+  display: flex;
+  align-items: center;
+}
+.header__nav {
+  display: flex;
+  align-items: center;
+  &__link {
+    text-decoration: none;
+    color: var(--color-text-main);
+    margin-left: 60px;
+    position: relative;
+    transition: color 0.3s ease;
+
+    &.active {
+      color: var(--color-primary);
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+      width: 100%;
+      height: 2px;
+      background-color: var(--color-primary);
+      clip-path: inset(0 100% 0 0);
+      transition: clip-path 0.3s ease-in-out;
+    }
+
+    &:hover::after {
+      clip-path: inset(0 0 0 0);
+    }
+
+    &:hover {
+      color: var(--color-primary);
+    }    
+  }
+}
+.header__img {
+  display: flex;
+  align-items: center;
+  &__img {
+    height: 50px;
+    width: auto;
+    margin-left: 35px;
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: scale(1.15);
+    }
+  }
+}
+span {
+  color: var(--color-text-inverse);
+  font-family: "Gothic №60";
+}
+#header__burger {
+  display: none;
+  color: var(--color-text-main); 
+}
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    &.is-open {
+        opacity: 1;
+        visibility: visible;
+
+        .mobile-menu__content {
+            transform: translateX(0);
+        }
+    }
+    &__overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: var(--shadow-modal);
+        backdrop-filter: blur(2px);
+    }
+    &__content {
+        position: absolute;
+        right: 0;
+        width: 80%;
+        max-width: 320px;
+        height: 100%;
+        background-color: var(--color-bg-card);
+        box-shadow: 4px 0 15px var(--shadow-text-medium);
+        transform: translateX(-100%);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        z-index: 2001;
+    }
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 40px;
+        border-bottom: 1px solid var(--color-border);
+        padding-bottom: 15px;
+    }
+
+    &__title {
+        color: var(--color-text-main);
+    }
+    &__close-btn {
+        background: none;
+        border: none;
+        font-size: 32px;
+        line-height: 1;
+        color: var(--color-text-main);
+        cursor: pointer;
+        transition: color 0.3s ease;
+        &:hover {
+            color: var(--color-primary);
+        }
+    }
+    &__nav {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    &__link {
+        text-decoration: none;
+        font-size: 18px;
+        color: var(--color-text-main);
+        font-weight: 500;
+        transition: color 0.3s ease, padding-left 0.3s ease;
+        
+        /* Логика активной ссылки такая же как в хедере */
+        &.active {
+            color: var(--color-primary);
+            font-weight: bold;
+        }
+
+        &:hover {
+            color: var(--color-primary);
+            padding-left: 10px; /* Небольшой сдвиг при наведении */
+        }
+    }
+
+    &__footer {
+        margin-top: auto;
+        color: var(--color-text-subtle);
+        font-size: 14px;
+        text-align: center;
+        padding-top: 20px;
+        border-top: 1px solid var(--color-border);
+    }
+}
+@media (max-width:1200px) {
+  a {
+    font-size: 16px;
+  } 
+}
+@media (max-width:767px) {
+  #header__burger {
+    display: block;
+  }
+  .header__navig {
+    display: none;
+  } 
+}
+.hidden {
+    display: none !important;
+}
+.header__img__img {
+    transition: opacity 0.3s ease;
+}
+.header__logo__img path {
+    fill: var(--color-header-primary, var(--color-primary)); 
+    transition: fill 0.3s ease;
+}
+.header__nav__link.active,
+.header__nav__link:hover {
+    color: var(--color-header-primary, var(--color-primary)); 
+}

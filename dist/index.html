@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <title>Главная | Фолиант</title>
+</head>
+<script src="./assets/js/slider.js"></script>
+<script src="./assets/js/book-genres.js"></script>
+<body>
+<header class="header">
+    <div class="header__logo">
+        <svg width="64" height="60" viewBox="0 0 64 60" fill="none" xmlns="http://www.w3.org/2000/svg" class="footer__logo__img">
+                    <path d="M32.2136 19.5641C37.7135 19.5641 42.1533 15.1773 42.1533 9.76909C42.1533 4.37182 37.7149 0 32.2136 0C26.7206 0 22.2614 4.37318 22.2614 9.76909C22.2614 15.1759 26.722 19.5641 32.2136 19.5641ZM41.8847 21.8182C46.4358 21.8182 48.3461 25.6282 48.3461 25.6282L63.0344 45.4623C63.6424 46.3473 64 47.43 64 48.5986C64 51.6805 61.4566 54.1855 58.322 54.1855C57.572 54.1855 56.8458 54.0259 56.2085 53.7832L47.304 51.3641V60H16.6946V51.3641L7.7873 53.7873C7.1612 54.0273 6.44049 54.1909 5.68778 54.1909C2.55588 54.1909 0 51.6955 0 48.6136C0 47.4464 0.352008 46.3814 0.982282 45.4936L15.6609 25.6282C15.6609 25.6282 17.5698 21.8182 22.1014 21.8182H41.8847ZM32.0077 53.9836L43.4806 50.2473L43.2316 50.1791C35.294 47.8991 38.3368 37.5955 46.2549 39.9014L47.304 40.2668V28.6473L32.0146 33.5877L16.6946 28.6473V40.2668L17.7437 39.9C25.6576 37.5955 28.7325 47.8977 20.8005 50.1777L20.5222 50.2459L32.0077 53.9836Z" fill="currentColor"/>
+                </svg>
+        <a href="./index.html"><span class="header__logo__title">Фолиант</span></a>
+    </div>
+    <nav class="header__nav">
+        <a href="./index.html" class="header__nav__link active header__navig">Главная</a>
+        <a href="./index2.html" class="header__nav__link header__navig">О нас</a>
+        <a href="./index3.html" class="header__nav__link header__navig">Контакты</a>
+        <a href="#" class="header__nav__link header__navig">Корзина</a>
+        <a href="#" class="header__nav__link header__navig">Профиль</a>
+    </nav>
+    <div class="header__img">
+    <a href="#" class="header__nav__link" id="header__burger">☰</a>
+    <a href="#" class="js-theme-toggle">
+        <img src="./assets/images/moon.webp" id="moon-icon" class="header__img__img" alt="Переключить на темную тему">
+        <img src="./assets/images/sun.webp" id="sun-icon" class="header__img__img hidden" alt="Переключить на светлую тему">
+    </a>
+</div>
+</header>
+<div id="mobile-menu" class="mobile-menu">
+    <div class="mobile-menu__overlay"></div>
+    <div class="mobile-menu__content">
+        <div class="mobile-menu__header">
+            <span class="mobile-menu__title">Меню</span>
+            <button class="mobile-menu__close-btn">&times;</button>
+        </div>
+        <nav class="mobile-menu__nav">
+            <a href="./index.html" class="mobile-menu__link">Главная</a>
+            <a href="./index2.html" class="mobile-menu__link">О нас</a>
+            <a href="./index3.html" class="mobile-menu__link">Контакты</a>
+            <a href="#" class="mobile-menu__link">Корзина</a>
+            <a href="#" class="mobile-menu__link">Профиль</a>
+        </nav>
+        
+        <div class="mobile-menu__footer">
+            <p>Фолиант &copy; 2024</p>
+        </div>
+    </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const burgerBtn = document.getElementById('header__burger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileMenuCloseBtn = mobileMenu.querySelector('.mobile-menu__close-btn');
+    const mobileMenuOverlay = mobileMenu.querySelector('.mobile-menu__overlay');
+    const mobileLinks = mobileMenu.querySelectorAll('.mobile-menu__link');
+
+    // Функция открытия меню
+    function openMobileMenu(e) {
+        e.preventDefault();
+        mobileMenu.classList.add('is-open');
+        document.body.style.overflow = 'hidden'; // Блокируем скролл сайта
+    }
+
+    // Функция закрытия меню
+    function closeMobileMenu() {
+        mobileMenu.classList.remove('is-open');
+        document.body.style.overflow = ''; // Возвращаем скролл
+    }
+
+    // Слушатели событий
+    if (burgerBtn) {
+        burgerBtn.addEventListener('click', openMobileMenu);
+    }
+    
+    if (mobileMenuCloseBtn) {
+        mobileMenuCloseBtn.addEventListener('click', closeMobileMenu);
+    }
+    
+    if (mobileMenuOverlay) {
+        mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+    }
+
+    // --- СИНХРОНИЗАЦИЯ АКТИВНОЙ ССЫЛКИ ДЛЯ МОБИЛЬНОГО МЕНЮ ---
+    
+    function setMobileActiveLink() {
+        const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+        
+        mobileLinks.forEach(link => {
+            link.classList.remove('active');
+            // Закрываем меню при клике на ссылку
+            link.addEventListener('click', () => {
+                 // Если ссылка ведет на якорь или другую страницу, меню закроется
+                 closeMobileMenu();
+            });
+
+            const linkPath = link.getAttribute('href').split('/').pop();
+            if (linkPath === currentPath) {
+                link.classList.add('active');
+            }
+        });
+        if (currentPath === '' || currentPath === 'index.html') {
+            const homeLink = document.querySelector('.mobile-menu__link[href="./index.html"]');
+            if(homeLink) homeLink.classList.add('active');
+        }
+    }
+    setMobileActiveLink();
+        const navLinks = document.querySelectorAll('.header__nav__link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(event) {
+                if (this.getAttribute('href') === '#') {
+                    event.preventDefault();
+                }
+                navLinks.forEach(item => {
+                    item.classList.remove('active');
+                });
+                this.classList.add('active');
+            });
+        });
+        function setActiveLinkOnLoad() {
+            const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                const linkPath = link.getAttribute('href').split('/').pop();
+                if (linkPath === currentPath) {
+                    link.classList.add('active');
+                }
+            });
+            if (currentPath === '' || currentPath === 'index.html') {
+                document.querySelector('.header__nav a[href="./index.html"]').classList.add('active');
+            }
+        }
+        setActiveLinkOnLoad();
+        const toggleBtn = document.querySelector('.js-theme-toggle');
+        const body = document.body;
+        const moonIcon = document.getElementById('moon-icon');
+        const sunIcon = document.getElementById('sun-icon');
+        function setTheme(isDark, animate = true) {
+            if (isDark) {
+                body.classList.add('dark-mode');
+                if (animate) {
+                    moonIcon.style.opacity = 0;
+                    setTimeout(() => {
+                        moonIcon.classList.add('hidden');
+                        sunIcon.classList.remove('hidden');
+                        sunIcon.style.opacity = 1;
+                    }, 300);
+                } else {
+                    moonIcon.classList.add('hidden');
+                    sunIcon.classList.remove('hidden');
+                }  
+            } else {
+                body.classList.remove('dark-mode');
+                if (animate) {
+                    sunIcon.style.opacity = 0;
+                    setTimeout(() => {
+                        sunIcon.classList.add('hidden');
+                        moonIcon.classList.remove('hidden');
+                        moonIcon.style.opacity = 1;
+                    }, 300);
+                } else {
+                    sunIcon.classList.add('hidden');
+                    moonIcon.classList.remove('hidden');
+                }
+            }
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        }
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        
+        let initialDarkState = (savedTheme === 'dark' || (savedTheme === null && prefersDark));
+        setTheme(initialDarkState, false);
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const isCurrentlyDark = body.classList.contains('dark-mode');
+                setTheme(!isCurrentlyDark, true);
+            });
+        }
+    });
+</script>
+<main>
+<section class="books-slider">
+  <div class="slider">
+    <h2 class="slider__title">Популярные новинки</h2>
+    <div class="slider__wrapper">
+    <button class="slider__arrow slider__arrow--left">←</button>
+    
+    <a href="#" class="slider__content js-open-book-modal">
+        <div class="slider__text">
+            <h3 class="slider__book-title"></h3>
+            <p class="slider__book-desc"></p>
+        </div>
+        <img class="slider__book-img" src="" alt="book cover">
+    </a>
+    <button class="slider__arrow slider__arrow--right">→</button>
+</div>
+    <div class="slider__dots" role="tablist" aria-label="Slider dots"></div>
+  </div>
+</section>
+<div class="container">
+        <div class="welcome-message">
+            <h2>Добро пожаловать!</h2>
+            <p>Привет! Вы в «Фолианте». Забудьте на минуту о бесконечных лентах соцсетей — у нас ждут самые захватывающие истории, проверенные временем.</p>
+            <p>Здесь есть всё:</p>
+            <ul>
+                <li>Бестселлеры, о которых все говорят.</li>
+                <li>Сокровища мировой классики, которые стоит перечитать.</li>
+                <li>Нешаблонная литература на любой, даже самый взыскательный вкус.</li>
+            </ul>
+            <p>Не знаете, что почитать? Наша команда с радостью составит для вас персональную подборку, просто спросите!</p>
+            <p>«Фолиант» — заряжаем чтением!</p>
+        </div>
+        <div class="bookstore-image">
+            <img src="./assets/images/bookstore.webp" class="bookstor-image__image">
+        </div>
+    </div>
+<section class="book-genres-section">
+    <div class="book-genres__header">
+        <h2 class="book-genres__title">Книжные жанры</h2>
+        <h3 class="book-genres__subtitle">Наши популярные категории по продажам</h3>
+    </div>
+    <div class="book-genres__wrapper">
+        <button class="book-genres__arrow book-genres__arrow--left">←</button>
+        <div class="book-genres__content">
+            </div>
+        <button class="book-genres__arrow book-genres__arrow--right">→</button>
+    </div>
+    <button class="book-genres__btn-primary">Смотреть больше →</button>
+</section>
+<section class="discount-promo">
+    <div class="discount-promo__background-fill">
+        </div>
+    <div class="discount-promo__content-wrapper">
+        <div class="discount-promo__container">
+            <div class="discount-promo__content">
+                <h2 class="discount-promo__title">Акция</h2>
+                <p class="discount-promo__description">
+                    Подпишитесь на нашу электронную рассылку, чтобы 
+                    получать информацию о будущих скидках, 
+                    личных предложений и новостях о компании.
+                    <br>
+                    Также вы получите скидку в 20% на следующий заказ
+                </p>
+                <form class="discount-promo__form">
+                    <input type="email" class="discount-promo__input" placeholder="Введите свою почту..." name="email" required>
+                    <button type="submit" class="discount-promo__button">
+                        Подписаться на рассылку
+                    </button>
+                </form>
+            </div> 
+            <div class="discount-promo__image-wrapper">
+                <img src="./assets/images/discountbook.webp" alt="Stack of books" class="discount-promo__image">
+            </div>
+        </div>
+    </div>
+</section>
+<section class="latest-news-section">
+    <header class="latest-news__header">
+        <h2 class="latest-news__title">Последние новости</h2>
+        <h3 class="latest-news__subtitle">Здесь вы можете прочитать последние новости о нашей команде</h3>
+    </header>
+    <div class="latest-news__content">  
+        <div class="news-card">
+    <div class="news-card__image-wrapper">
+        <img src="./assets/images/news1.webp" alt="Крупнейшее издательство страны участвует в престижном рейтинге от HeadHunter" class="news-card__image">
+    </div>
+    <div class="news-card__body">
+        <p class="news-card__date">2 ноября, 2025</p>
+        <p class="news-card__description">
+            Крупнейшее издательство страны участвует в престижном рейтинге от HeadHunter
+        </p>
+        <div class="news-card__socials">
+            <a href="#" class="social-icon-link">
+                <svg class="svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M22.0078 12C22.0078 6.47715 17.5307 2 12.0078 2C6.48501 2 2.00781 6.47715 2.00781 12C2.00781 17.5228 6.48501 22 12.0078 22C17.5307 22 22.0078 17.5228 22.0078 12ZM14.9943 9.49983H13.2359V8.40698C13.2359 7.42628 13.6231 7.00062 14.5097 7.00062H15.6599V4.76636H13.4357C11.166 4.76636 10.0156 6.13608 10.0156 8.16726V9.49983H8.38574V11.7588H10.0156V18.1561H12.2746V11.7588H13.9169L14.9943 9.49983Z" fill="currentColor"/>
+                </svg>
+            </a>
+            <a href="#" class="social-icon-link">
+                <svg class="svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7.8 2H16.2C19.46 2 22 4.54 22 7.8V16.2C22 19.46 19.46 22 16.2 22H7.8C4.54 22 2 19.46 2 16.2V7.8C2 4.54 4.54 2 7.8 2ZM12 7.7C9.64 7.7 7.7 9.64 7.7 12C7.7 14.36 9.64 16.3 12 16.3C14.36 16.3 16.3 14.36 16.3 12C16.3 9.64 14.36 7.7 12 7.7ZM17.2 6.5C17.75 6.5 18.2 6.05 18.2 5.5C18.2 4.95 17.75 4.5 17.2 4.5C16.65 4.5 16.2 4.95 16.2 5.5C16.2 6.05 16.65 6.5 17.2 6.5Z" fill="currentColor"/>
+                </svg>
+            </a>
+            <a href="#" class="social-icon-link">
+                <svg class="svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M16.619 12.016C16.619 12.164 16.619 12.312 16.619 12.46C16.619 16.516 13.565 21.258 7.373 21.258C5.467 21.258 3.742 20.738 2.302 19.789C2.636 19.828 2.977 19.845 3.327 19.845C5.19 19.845 6.915 19.227 8.309 18.156C6.598 17.844 5.177 16.695 4.67 15.117C4.912 15.156 5.161 15.175 5.418 15.175C5.782 15.175 6.138 15.127 6.486 15.038C4.606 14.656 3.013 13.063 2.894 11.082C3.218 11.23 3.567 11.319 3.931 11.319C2.261 10.222 1.487 8.04 2.11 6.008C4.016 8.355 6.792 9.871 9.882 10.027C9.824 9.771 9.795 9.497 9.795 9.224C9.795 7.039 11.533 5.301 13.717 5.301C14.869 5.301 15.894 5.792 16.602 6.551C17.472 6.381 18.291 6.069 19.034 5.617C18.73 6.645 18.019 7.458 17.078 7.978C17.788 7.893 18.47 7.705 19.102 7.426C18.618 8.446 17.659 9.352 16.619 9.946V12.016Z" fill="currentColor"/>
+                </svg>
+            </a>
+        </div>
+    </div>
+</div> 
+
+        <div class="news-card">
+    <div class="news-card__image-wrapper">
+        <img src="./assets/images/news2.webp" alt="Крупнейшее издательство страны участвует в престижном рейтинге от HeadHunter" class="news-card__image">
+    </div>
+    <div class="news-card__body">
+        <p class="news-card__date">2 ноября, 2025</p>
+        <p class="news-card__description">
+            Крупнейшее издательство страны участвует в престижном рейтинге от HeadHunter
+        </p>
+        <div class="news-card__socials">
+            <a href="#" class="social-icon-link">
+                <svg class="svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M22.0078 12C22.0078 6.47715 17.5307 2 12.0078 2C6.48501 2 2.00781 6.47715 2.00781 12C2.00781 17.5228 6.48501 22 12.0078 22C17.5307 22 22.0078 17.5228 22.0078 12ZM14.9943 9.49983H13.2359V8.40698C13.2359 7.42628 13.6231 7.00062 14.5097 7.00062H15.6599V4.76636H13.4357C11.166 4.76636 10.0156 6.13608 10.0156 8.16726V9.49983H8.38574V11.7588H10.0156V18.1561H12.2746V11.7588H13.9169L14.9943 9.49983Z" fill="currentColor"/>
+                </svg>
+            </a>
+            <a href="#" class="social-icon-link">
+                <svg class="svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7.8 2H16.2C19.46 2 22 4.54 22 7.8V16.2C22 19.46 19.46 22 16.2 22H7.8C4.54 22 2 19.46 2 16.2V7.8C2 4.54 4.54 2 7.8 2ZM12 7.7C9.64 7.7 7.7 9.64 7.7 12C7.7 14.36 9.64 16.3 12 16.3C14.36 16.3 16.3 14.36 16.3 12C16.3 9.64 14.36 7.7 12 7.7ZM17.2 6.5C17.75 6.5 18.2 6.05 18.2 5.5C18.2 4.95 17.75 4.5 17.2 4.5C16.65 4.5 16.2 4.95 16.2 5.5C16.2 6.05 16.65 6.5 17.2 6.5Z" fill="currentColor"/>
+                </svg>
+            </a>
+            <a href="#" class="social-icon-link">
+                <svg class="svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M16.619 12.016C16.619 12.164 16.619 12.312 16.619 12.46C16.619 16.516 13.565 21.258 7.373 21.258C5.467 21.258 3.742 20.738 2.302 19.789C2.636 19.828 2.977 19.845 3.327 19.845C5.19 19.845 6.915 19.227 8.309 18.156C6.598 17.844 5.177 16.695 4.67 15.117C4.912 15.156 5.161 15.175 5.418 15.175C5.782 15.175 6.138 15.127 6.486 15.038C4.606 14.656 3.013 13.063 2.894 11.082C3.218 11.23 3.567 11.319 3.931 11.319C2.261 10.222 1.487 8.04 2.11 6.008C4.016 8.355 6.792 9.871 9.882 10.027C9.824 9.771 9.795 9.497 9.795 9.224C9.795 7.039 11.533 5.301 13.717 5.301C14.869 5.301 15.894 5.792 16.602 6.551C17.472 6.381 18.291 6.069 19.034 5.617C18.73 6.645 18.019 7.458 17.078 7.978C17.788 7.893 18.47 7.705 19.102 7.426C18.618 8.446 17.659 9.352 16.619 9.946V12.016Z" fill="currentColor"/>
+                </svg>
+            </a>
+        </div>
+    </div>
+</div> 
+        
+        <div class="news-card">
+    <div class="news-card__image-wrapper">
+        <img src="./assets/images/news3.webp" alt="Крупнейшее издательство страны участвует в престижном рейтинге от HeadHunter" class="news-card__image">
+    </div>
+    <div class="news-card__body">
+        <p class="news-card__date">2 ноября, 2025</p>
+        <p class="news-card__description">
+            Крупнейшее издательство страны участвует в престижном рейтинге от HeadHunter
+        </p>
+        <div class="news-card__socials">
+            <a href="#" class="social-icon-link">
+                <svg class="svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M22.0078 12C22.0078 6.47715 17.5307 2 12.0078 2C6.48501 2 2.00781 6.47715 2.00781 12C2.00781 17.5228 6.48501 22 12.0078 22C17.5307 22 22.0078 17.5228 22.0078 12ZM14.9943 9.49983H13.2359V8.40698C13.2359 7.42628 13.6231 7.00062 14.5097 7.00062H15.6599V4.76636H13.4357C11.166 4.76636 10.0156 6.13608 10.0156 8.16726V9.49983H8.38574V11.7588H10.0156V18.1561H12.2746V11.7588H13.9169L14.9943 9.49983Z" fill="currentColor"/>
+                </svg>
+            </a>
+            <a href="#" class="social-icon-link">
+                <svg class="svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7.8 2H16.2C19.46 2 22 4.54 22 7.8V16.2C22 19.46 19.46 22 16.2 22H7.8C4.54 22 2 19.46 2 16.2V7.8C2 4.54 4.54 2 7.8 2ZM12 7.7C9.64 7.7 7.7 9.64 7.7 12C7.7 14.36 9.64 16.3 12 16.3C14.36 16.3 16.3 14.36 16.3 12C16.3 9.64 14.36 7.7 12 7.7ZM17.2 6.5C17.75 6.5 18.2 6.05 18.2 5.5C18.2 4.95 17.75 4.5 17.2 4.5C16.65 4.5 16.2 4.95 16.2 5.5C16.2 6.05 16.65 6.5 17.2 6.5Z" fill="currentColor"/>
+                </svg>
+            </a>
+            <a href="#" class="social-icon-link">
+                <svg class="svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M16.619 12.016C16.619 12.164 16.619 12.312 16.619 12.46C16.619 16.516 13.565 21.258 7.373 21.258C5.467 21.258 3.742 20.738 2.302 19.789C2.636 19.828 2.977 19.845 3.327 19.845C5.19 19.845 6.915 19.227 8.309 18.156C6.598 17.844 5.177 16.695 4.67 15.117C4.912 15.156 5.161 15.175 5.418 15.175C5.782 15.175 6.138 15.127 6.486 15.038C4.606 14.656 3.013 13.063 2.894 11.082C3.218 11.23 3.567 11.319 3.931 11.319C2.261 10.222 1.487 8.04 2.11 6.008C4.016 8.355 6.792 9.871 9.882 10.027C9.824 9.771 9.795 9.497 9.795 9.224C9.795 7.039 11.533 5.301 13.717 5.301C14.869 5.301 15.894 5.792 16.602 6.551C17.472 6.381 18.291 6.069 19.034 5.617C18.73 6.645 18.019 7.458 17.078 7.978C17.788 7.893 18.47 7.705 19.102 7.426C18.618 8.446 17.659 9.352 16.619 9.946V12.016Z" fill="currentColor"/>
+                </svg>
+            </a>
+        </div>
+    </div>
+</div>
+    </div>
+    <button class="latest-news__btn-primary">
+        Смотреть больше →
+    </button>
+</section>
+<section class="what-we-do-section">
+    <div class="what-we-do__background-fill"></div>
+    <div class="what-we-do__content-wrapper">
+        <h2 class="what-we-do__title">Что мы делаем?</h2>
+        <div class="what-we-do__main-content">
+            <div class="what-we-do__text-block">
+                <p class="what-we-do__paragraph">
+                    «Фолиант» – место, где рождаются ваши 
+                    любимые истории. Мы совмещаем тщательно отобранный 
+                    ассортимент книг с высоким уровнем 
+                    сервиса, создавая комфортную среду для 
+                    всех ценителей литературы.
+                </p>
+
+                <p class="what-we-do__paragraph">Чем мы занимаемся:</p>
+
+                <ul class="what-we-do__list">
+                    <li>
+                        Подбираем книги индивидуально – помогаем найти 
+                        именно то, что вам нужно.
+                    </li>
+                    <li>
+                        Обеспечиваем удобные способы покупки – уютный 
+                        магазин, быстрая доставка, самовывоз
+                    </li>
+                </ul>
+
+                <p class="what-we-do__paragraph">
+                    Наша цель – делать процесс выбора и чтения книг 
+                    по-настоящему приятным и вдохновляющим.
+                </p>
+                <p class="what-we-do__paragraph">
+                    Мы ценим ваше время и любовь к чтению, 
+                    поэтому предлагаем только проверенные решения 
+                    и внимательное отношение к каждому посетителю.
+                </p>
+            </div>
+            
+            <div class="what-we-do__image-grid">
+                <img src="./assets/images/whatwedoing1.webp" class="what-we-do__image">
+                <img src="./assets/images/whatwedoing2.webp" class="what-we-do__image">
+                <img src="./assets/images/whatwedoing3.webp" class="what-we-do__image">
+            </div>
+        </div>
+    </div>
+</section>
+<section class="our-advantages-section">
+    <div class="our-advantages__content-wrapper">
+        <h2 class="our-advantages__title">Наши преимущества</h2>
+        <div class="our-advantages__grid">   
+            <div class="advantage-card">
+    <div class="advantage-card__icon-wrapper">
+        <svg class="svg-icon" viewBox="0 0 134 105" xmlns="http://www.w3.org/2000/svg"><path d="M66.8176 47.7275H9.54492V57.273H66.8176V47.7275Z" fill="white"/><path d="M47.7272 23.8633H0V33.4087H47.7272V23.8633Z" fill="white"/><path d="M133.249 50.6214L118.93 17.2124C118.564 16.3532 117.952 15.6208 117.173 15.1062C116.393 14.5916 115.479 14.3176 114.545 14.3182H100.227V4.77273C100.227 3.50692 99.7238 2.29296 98.8288 1.3979C97.9337 0.50284 96.7197 0 95.4539 0H19.0903V9.54545H90.6812V69.4727C88.5067 70.7356 86.6036 72.4164 85.0817 74.4182C83.5598 76.42 82.4492 78.7033 81.8139 81.1363H51.8212C50.6595 76.6373 47.8969 72.7163 44.0512 70.1085C40.2054 67.5006 35.5405 66.3848 30.931 66.9703C26.3214 67.5558 22.0836 69.8024 19.0119 73.2889C15.9403 76.7754 14.2456 81.2625 14.2456 85.9091C14.2456 90.5557 15.9403 95.0427 19.0119 98.5292C22.0836 102.016 26.3214 104.262 30.931 104.848C35.5405 105.433 40.2054 104.318 44.0512 101.71C47.8969 99.1018 50.6595 95.1808 51.8212 90.6818H81.8139C82.8546 94.7756 85.23 98.4059 88.5645 100.999C91.899 103.592 96.0026 104.999 100.227 104.999C104.451 104.999 108.554 103.592 111.889 100.999C115.223 98.4059 117.599 94.7756 118.639 90.6818H128.863C130.129 90.6818 131.343 90.1789 132.238 89.2839C133.133 88.3888 133.636 87.1749 133.636 85.9091V52.5C133.636 51.854 133.504 51.2148 133.249 50.6214ZM33.4085 95.4545C31.5206 95.4545 29.6751 94.8947 28.1053 93.8458C26.5356 92.7969 25.3121 91.3061 24.5896 89.5619C23.8672 87.8177 23.6781 85.8985 24.0465 84.0468C24.4148 82.1952 25.3239 80.4944 26.6588 79.1594C27.9938 77.8244 29.6946 76.9153 31.5463 76.547C33.3979 76.1787 35.3172 76.3677 37.0614 77.0902C38.8056 77.8127 40.2964 79.0361 41.3452 80.6059C42.3941 82.1756 42.9539 84.0211 42.9539 85.9091C42.951 88.4398 41.9444 90.866 40.1549 92.6555C38.3654 94.445 35.9392 95.4516 33.4085 95.4545ZM100.227 23.8636H111.399L121.627 47.7273H100.227V23.8636ZM100.227 95.4545C98.3387 95.4545 96.4932 94.8947 94.9235 93.8458C93.3537 92.7969 92.1303 91.3061 91.4078 89.5619C90.6853 87.8177 90.4963 85.8985 90.8646 84.0468C91.2329 82.1952 92.142 80.4944 93.477 79.1594C94.812 77.8244 96.5128 76.9153 98.3644 76.547C100.216 76.1787 102.135 76.3677 103.88 77.0902C105.624 77.8127 107.115 79.0361 108.163 80.6059C109.212 82.1756 109.772 84.0211 109.772 85.9091C109.769 88.4398 108.763 90.866 106.973 92.6555C105.184 94.445 102.757 95.4516 100.227 95.4545ZM124.09 81.1363H118.639C117.588 77.0484 115.21 73.4249 111.877 70.8338C108.545 68.2427 104.448 66.8303 100.227 66.8182V57.2727H124.09V81.1363Z" fill="white"/></svg>
+    </div>
+    <p class="advantage-card__description">
+        Быстрая доставка
+    </p>
+</div> 
+            <div class="advantage-card">
+    <div class="advantage-card__icon-wrapper">
+        <svg class="svg-icon" width="105" height="105" viewBox="0 0 105 105" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.81975 81.8775C9.08775 88.8709 15.981 93.3337 23.3363 93.3337H23.625C24.2998 96.6274 26.0909 99.5871 28.6956 101.713C31.3003 103.838 34.5589 104.999 37.9207 105C40.32 105 42.5617 104.396 44.5462 103.357C45.3745 102.903 46.0636 102.232 46.5398 101.416C47.0161 100.6 47.2616 99.6704 47.25 98.7258V5.38519C47.2606 4.18233 46.8566 3.01253 46.1061 2.07256C45.3555 1.1326 44.3041 0.479839 43.1288 0.224103C40.4949 -0.287514 37.7658 0.0833972 35.364 1.27942C31.458 3.14855 29.169 7.32257 29.169 11.6646V11.9534C26.2459 11.3567 23.2101 11.6709 20.4711 12.8537C17.7321 14.0364 15.4217 16.0307 13.8514 18.5676C12.2812 21.1045 11.5267 24.062 11.6897 27.0411C11.8527 30.0202 12.9254 32.8777 14.763 35.2282C10.6474 35.873 6.89785 37.9677 4.19077 41.1342C1.48368 44.3007 -0.00262727 48.3305 3.48631e-06 52.4965C3.48631e-06 58.6815 3.20775 64.1051 8.04825 67.2605C5.79075 71.3085 5.0505 76.4276 6.81975 81.8775ZM90.237 35.2282C92.0746 32.8777 93.1473 30.0202 93.3103 27.0411C93.4733 24.062 92.7188 21.1045 91.1485 18.5676C89.5783 16.0307 87.2679 14.0364 84.5289 12.8537C81.7899 11.6709 78.7541 11.3567 75.831 11.9534V11.6646C75.831 7.32782 73.5367 3.14855 69.6307 1.27942C67.2309 0.0830415 64.5034 -0.287912 61.8712 0.224103C60.6964 0.480742 59.6455 1.13374 58.8951 2.07351C58.1447 3.01327 57.7404 4.18258 57.75 5.38519V98.7206C57.75 100.637 58.758 102.459 60.459 103.351C62.4435 104.396 64.68 105 67.0793 105C70.4418 104.999 73.701 103.837 76.3058 101.711C78.9106 99.584 80.7013 96.6231 81.375 93.3285H81.669C89.019 93.3285 95.9175 88.8657 98.1855 81.8722C99.9547 76.4224 99.2145 71.3033 96.957 67.2553C99.4228 65.662 101.451 63.4768 102.855 60.8989C104.26 58.321 104.998 55.4324 105 52.4965C105.003 48.3305 103.516 44.3007 100.809 41.1342C98.1021 37.9677 94.3526 35.873 90.237 35.2282Z" fill="white"/></svg>
+    </div>
+    <p class="advantage-card__description">
+        Консультации от сотрудников
+    </p>
+</div> 
+            <div class="advantage-card">
+    <div class="advantage-card__icon-wrapper">
+        <svg class="svg-icon" width="150" height="105" viewBox="0 0 150 105" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M142.5 0H7.5C5.51088 0 3.60322 0.790178 2.1967 2.1967C0.790176 3.60322 0 5.51088 0 7.5V37.5H6.6975C14.1675 37.5 21.0975 42.6075 22.2975 49.98C22.6631 52.1328 22.5545 54.3394 21.9792 56.4459C21.404 58.5524 20.3761 60.5079 18.9671 62.1761C17.5581 63.8443 15.8021 65.185 13.8215 66.1045C11.841 67.024 9.6836 67.5003 7.5 67.5H0V97.5C0 99.4891 0.790176 101.397 2.1967 102.803C3.60322 104.21 5.51088 105 7.5 105H142.5C144.489 105 146.397 104.21 147.803 102.803C149.21 101.397 150 99.4891 150 97.5V67.5H142.5C140.316 67.5003 138.159 67.024 136.178 66.1045C134.198 65.185 132.442 63.8443 131.033 62.1761C129.624 60.5079 128.596 58.5524 128.021 56.4459C127.446 54.3394 127.337 52.1328 127.703 49.98C128.903 42.6075 135.833 37.5 143.303 37.5H150V7.5C150 5.51088 149.21 3.60322 147.803 2.1967C146.397 0.790178 144.489 0 142.5 0ZM52.5 30C54.4891 30 56.3968 30.7902 57.8033 32.1967C59.2098 33.6032 60 35.5109 60 37.5C60 39.4891 59.2098 41.3968 57.8033 42.8033C56.3968 44.2098 54.4891 45 52.5 45C50.5109 45 48.6032 44.2098 47.1967 42.8033C45.7902 41.3968 45 39.4891 45 37.5C45 35.5109 45.7902 33.6032 47.1967 32.1967C48.6032 30.7902 50.5109 30 52.5 30ZM46.5 78L91.5 18L103.5 27L58.5 87L46.5 78ZM97.5 75C95.5109 75 93.6032 74.2098 92.1967 72.8033C90.7902 71.3968 90 69.4891 90 67.5C90 65.5109 90.7902 63.6032 92.1967 62.1967C93.6032 60.7902 95.5109 60 97.5 60C99.4891 60 101.397 60.7902 102.803 62.1967C104.21 63.6032 105 65.5109 105 67.5C105 69.4891 104.21 71.3968 102.803 72.8033C101.397 74.2098 99.4891 75 97.5 75Z" fill="white"/></svg>
+    </div>
+    <p class="advantage-card__description">
+        Программа лояльности
+    </p>
+</div>   
+            <div class="advantage-card">
+    <div class="advantage-card__icon-wrapper">
+        <svg class="svg-icon" width="150" height="105" viewBox="0 0 150 105" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M74.6059 0C61.6879 0 51.2159 12.4784 51.2159 27.8714C51.2159 38.5469 56.2529 47.8185 63.6494 52.5L55.0723 56.5571L32.2474 67.3615C30.0424 68.4868 28.9419 70.395 28.9419 73.0957C28.9419 81.6478 28.9419 90.1998 28.9419 98.752C29.1233 101.96 31.009 104.949 34.0664 105H115.269C118.759 104.69 120.525 101.821 120.56 98.752C120.56 90.1999 120.56 81.6478 120.56 73.0957C120.56 70.395 119.459 68.4868 117.254 67.3615L95.2556 56.5571L86.1134 52.1365C93.2064 47.3497 97.996 38.2785 97.996 27.8715C97.9959 12.4784 87.5237 0 74.6059 0ZM36.8779 9.80108C31.3188 10.0166 26.913 12.4717 23.5658 16.3836C19.8633 21.0935 18.0582 26.6855 18.0234 32.2485C18.2507 40.4745 21.857 48.2618 28.277 52.3352L2.64538 64.492C0.88125 65.1671 0 66.7423 0 69.218V89.8089C0.13775 92.5397 1.527 94.8348 4.13188 94.8741H21.1674V73.0957C21.4493 67.2732 24.1283 62.5668 28.9419 60.2702L45.9728 52.0009C47.2958 51.2131 48.5641 50.1423 49.7769 48.7921C42.7549 37.7341 41.7797 24.4895 46.3052 12.8404C43.3619 11.0018 40.054 9.82034 36.8779 9.80108ZM112.951 9.80108C109.316 9.87877 105.956 11.2451 103.196 13.1748C107.598 24.9294 106.384 38.1821 99.886 48.4527C101.319 50.1406 102.812 51.4351 104.355 52.3354L120.726 60.2702C125.713 63.0617 128.284 67.8098 128.334 73.0958V94.8744H145.863C148.746 94.6204 149.975 92.2734 150 89.809V69.2181C150 66.9675 149.119 65.3924 147.355 64.492L122.051 52.1656C128.613 47.2273 131.908 39.8262 131.972 32.2485C131.797 26.2508 130.002 20.6817 126.429 16.3836C122.696 12.2502 118.066 9.84483 112.951 9.80108Z" fill="white"/></svg>
+    </div>
+    <p class="advantage-card__description">
+        Клуб сторонников
+    </p>
+</div>
+        </div>
+    </div>
+</section>
+</main>
+<footer class="footer">        
+        <div class="footer__block footer__logo-block">
+            <div class="footer__logo">
+                <svg width="64" height="60" viewBox="0 0 64 60" fill="none" xmlns="http://www.w3.org/2000/svg" class="footer__logo__img">
+                    <path d="M32.2136 19.5641C37.7135 19.5641 42.1533 15.1773 42.1533 9.76909C42.1533 4.37182 37.7149 0 32.2136 0C26.7206 0 22.2614 4.37318 22.2614 9.76909C22.2614 15.1759 26.722 19.5641 32.2136 19.5641ZM41.8847 21.8182C46.4358 21.8182 48.3461 25.6282 48.3461 25.6282L63.0344 45.4623C63.6424 46.3473 64 47.43 64 48.5986C64 51.6805 61.4566 54.1855 58.322 54.1855C57.572 54.1855 56.8458 54.0259 56.2085 53.7832L47.304 51.3641V60H16.6946V51.3641L7.7873 53.7873C7.1612 54.0273 6.44049 54.1909 5.68778 54.1909C2.55588 54.1909 0 51.6955 0 48.6136C0 47.4464 0.352008 46.3814 0.982282 45.4936L15.6609 25.6282C15.6609 25.6282 17.5698 21.8182 22.1014 21.8182H41.8847ZM32.0077 53.9836L43.4806 50.2473L43.2316 50.1791C35.294 47.8991 38.3368 37.5955 46.2549 39.9014L47.304 40.2668V28.6473L32.0146 33.5877L16.6946 28.6473V40.2668L17.7437 39.9C25.6576 37.5955 28.7325 47.8977 20.8005 50.1777L20.5222 50.2459L32.0077 53.9836Z"/>
+                </svg>
+                <a href="./index.html"><span class="footer__logo__title">Фолиант</span></a>
+            </div>
+            <p class="footer__copyright">
+                © 2025, ФОЛИАНТ. Все права защищены.
+            </p>
+        </div>
+        <div class="footer__block footer__links-group">
+            <span class="footer__title">Интернет-магазин</span>
+            <ul class="footer__list">
+                <li class="footer__list__item"><a href="#" class="footer__list__link">Акции</a></li>
+                <li class="footer__list__item"><a href="#" class="footer__list__link">Распродажа</a></li>
+                <li class="footer__list__item"><a href="#" class="footer__list__link">Доставка и оплата</a></li>
+                <li class="footer__list__item"><a href="#" class="footer__list__link">Программа лояльности</a></li>
+                <li class="footer__list__item"><a href="#" class="footer__list__link">Подарочные сертификаты</a></li>
+            </ul>
+        </div>
+        <div class="footer__block footer__links-group footer__contacts">
+            <span class="footer__title">Контакты</span>
+            <ul class="footer__list">
+                <li class="footer__list__item"><a href="#" class="footer__list__link">Мы в соцсетях</a></li>
+                <li class="footer__list__item">
+                    <span class="footer__contact-label">Наша почта:</span>
+                    <a href="mailto:foliant@gmail.com" class="footer__list__link">foliant@gmail.com</a>
+                </li>
+                <li class="footer__list__item">
+                    <span class="footer__contact-label">Номер тех. поддержки:</span>
+                    <a href="tel:89501414444" class="footer__list__link">8 950 141-44-44</a>
+                </li>
+            </ul>
+        </div>
+        <div class="footer__block footer__links-group">
+            <span class="footer__title">Важные ссылки</span>
+            <ul class="footer__list">
+                <li class="footer__list__item"><a href="#" class="footer__list__link">Политика конфиденциальности</a></li>
+                <li class="footer__list__item"><a href="#" class="footer__list__link">FAQs</a></li>
+                <li class="footer__list__item"><a href="#" class="footer__list__link">Условия использования</a></li>
+            </ul>
+        </div>
+</footer>
+</body>
+</html>

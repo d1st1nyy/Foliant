@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/main.css"/>
+    <title id="page-title">Детали книги | Фолиант</title>
+</head>
+<body>
+    @@include('../components/_header.html')
+    <main class="book-detail-page">
+        <section class="book-details-container">
+            <div class="book-details-card">
+                <div class="book-details__image-wrapper">
+                    <img id="detail-img" src="" alt="Обложка книги" class="book-details__img" />
+                </div>
+                
+                <div class="book-details__info">
+                    <h1 id="detail-title" class="book-details__title"></h1>
+                    <h2 id="detail-author" class="book-details__author"></h2>
+                    
+                    <div class="book-details__price">
+                        <span id="detail-price" class="current-price"></span>
+                        <span class="old-price"></span>
+                    </div>
+                    
+                    <button class="buy-button">Добавить в корзину</button>
+                    <button class="wishlist-button">В список желаемого</button>
+                    
+                    <div class="book-details__metadata">
+                        <h3>Характеристики:</h3>
+                        <p><strong>Год издания:</strong> <span id="detail-year"></span></p>
+                        <p><strong>Жанр:</strong><span id="detail-genre"></span></p>
+                        <p><strong>Переплет:</strong><span id="detail-pereplet"></span></p>
+                        <p><strong>Количество страниц:</strong><span id="detail-count"></span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="book-details-description">
+                <h2 class="description-heading">Подробное описание</h2>
+                <p id="detail-desc"></p>
+            </div>
+        </section>
+    </main>
+    @@include('../components/_footer.html')
+    <script src="./assets/js/bookDetailsLoader.js"></script>
+</body>
+</html>

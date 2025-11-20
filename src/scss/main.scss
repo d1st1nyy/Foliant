@@ -1,0 +1,49 @@
+// ==== 1. Utils ====
+@use 'utils/variables';
+
+// ==== 2. Base styles ====
+@use 'base/reset';
+@use 'base/typography';
+@use 'base/layout';
+
+// ==== 3. Layout ====
+@use 'layout/container';
+
+// ==== 4. Components ====
+@use 'components/header';
+@use 'components/book-genres';
+@use 'components/slider';
+@use 'components/hello-block';
+@use 'components/discount-promo';
+@use 'components/news-card';
+@use 'components/what-we-do';
+@use 'components/our-advantages';
+@use 'components/footer';
+@use 'components/about-us';
+@use 'components/contacts';
+@use 'components/book-detail';
+::-webkit-scrollbar {
+  width: 0;
+}
+body {
+  margin: 0;
+  padding: 0;
+  scrollbar-width: none; 
+  background-color: var(--color-bg-body);
+  color: var(--color-text-main);
+}
+* {
+  box-sizing: border-box;
+}
+a {
+  text-decoration: none;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 30px;
+  background-color: var(--color-bg-card);
+  height: 80px;
+  box-sizing: border-box;
+}

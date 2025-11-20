@@ -1,0 +1,174 @@
+<header class="header">
+    <div class="header__logo">
+        <svg width="64" height="60" viewBox="0 0 64 60" fill="none" xmlns="http://www.w3.org/2000/svg" class="footer__logo__img">
+                    <path d="M32.2136 19.5641C37.7135 19.5641 42.1533 15.1773 42.1533 9.76909C42.1533 4.37182 37.7149 0 32.2136 0C26.7206 0 22.2614 4.37318 22.2614 9.76909C22.2614 15.1759 26.722 19.5641 32.2136 19.5641ZM41.8847 21.8182C46.4358 21.8182 48.3461 25.6282 48.3461 25.6282L63.0344 45.4623C63.6424 46.3473 64 47.43 64 48.5986C64 51.6805 61.4566 54.1855 58.322 54.1855C57.572 54.1855 56.8458 54.0259 56.2085 53.7832L47.304 51.3641V60H16.6946V51.3641L7.7873 53.7873C7.1612 54.0273 6.44049 54.1909 5.68778 54.1909C2.55588 54.1909 0 51.6955 0 48.6136C0 47.4464 0.352008 46.3814 0.982282 45.4936L15.6609 25.6282C15.6609 25.6282 17.5698 21.8182 22.1014 21.8182H41.8847ZM32.0077 53.9836L43.4806 50.2473L43.2316 50.1791C35.294 47.8991 38.3368 37.5955 46.2549 39.9014L47.304 40.2668V28.6473L32.0146 33.5877L16.6946 28.6473V40.2668L17.7437 39.9C25.6576 37.5955 28.7325 47.8977 20.8005 50.1777L20.5222 50.2459L32.0077 53.9836Z" fill="currentColor"/>
+                </svg>
+        <a href="./index.html"><span class="header__logo__title">Фолиант</span></a>
+    </div>
+    <nav class="header__nav">
+        <a href="./index.html" class="header__nav__link active header__navig">Главная</a>
+        <a href="./index2.html" class="header__nav__link header__navig">О нас</a>
+        <a href="./index3.html" class="header__nav__link header__navig">Контакты</a>
+        <a href="#" class="header__nav__link header__navig">Корзина</a>
+        <a href="#" class="header__nav__link header__navig">Профиль</a>
+    </nav>
+    <div class="header__img">
+    <a href="#" class="header__nav__link" id="header__burger">☰</a>
+    <a href="#" class="js-theme-toggle">
+        <img src="./assets/images/moon.webp" id="moon-icon" class="header__img__img" alt="Переключить на темную тему">
+        <img src="./assets/images/sun.webp" id="sun-icon" class="header__img__img hidden" alt="Переключить на светлую тему">
+    </a>
+</div>
+</header>
+<div id="mobile-menu" class="mobile-menu">
+    <div class="mobile-menu__overlay"></div>
+    <div class="mobile-menu__content">
+        <div class="mobile-menu__header">
+            <span class="mobile-menu__title">Меню</span>
+            <button class="mobile-menu__close-btn">&times;</button>
+        </div>
+        <nav class="mobile-menu__nav">
+            <a href="./index.html" class="mobile-menu__link">Главная</a>
+            <a href="./index2.html" class="mobile-menu__link">О нас</a>
+            <a href="./index3.html" class="mobile-menu__link">Контакты</a>
+            <a href="#" class="mobile-menu__link">Корзина</a>
+            <a href="#" class="mobile-menu__link">Профиль</a>
+        </nav>
+        
+        <div class="mobile-menu__footer">
+            <p>Фолиант &copy; 2024</p>
+        </div>
+    </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const burgerBtn = document.getElementById('header__burger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileMenuCloseBtn = mobileMenu.querySelector('.mobile-menu__close-btn');
+    const mobileMenuOverlay = mobileMenu.querySelector('.mobile-menu__overlay');
+    const mobileLinks = mobileMenu.querySelectorAll('.mobile-menu__link');
+
+    // Функция открытия меню
+    function openMobileMenu(e) {
+        e.preventDefault();
+        mobileMenu.classList.add('is-open');
+        document.body.style.overflow = 'hidden'; // Блокируем скролл сайта
+    }
+
+    // Функция закрытия меню
+    function closeMobileMenu() {
+        mobileMenu.classList.remove('is-open');
+        document.body.style.overflow = ''; // Возвращаем скролл
+    }
+
+    // Слушатели событий
+    if (burgerBtn) {
+        burgerBtn.addEventListener('click', openMobileMenu);
+    }
+    
+    if (mobileMenuCloseBtn) {
+        mobileMenuCloseBtn.addEventListener('click', closeMobileMenu);
+    }
+    
+    if (mobileMenuOverlay) {
+        mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+    }
+
+    // --- СИНХРОНИЗАЦИЯ АКТИВНОЙ ССЫЛКИ ДЛЯ МОБИЛЬНОГО МЕНЮ ---
+    
+    function setMobileActiveLink() {
+        const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+        
+        mobileLinks.forEach(link => {
+            link.classList.remove('active');
+            // Закрываем меню при клике на ссылку
+            link.addEventListener('click', () => {
+                 // Если ссылка ведет на якорь или другую страницу, меню закроется
+                 closeMobileMenu();
+            });
+
+            const linkPath = link.getAttribute('href').split('/').pop();
+            if (linkPath === currentPath) {
+                link.classList.add('active');
+            }
+        });
+        if (currentPath === '' || currentPath === 'index.html') {
+            const homeLink = document.querySelector('.mobile-menu__link[href="./index.html"]');
+            if(homeLink) homeLink.classList.add('active');
+        }
+    }
+    setMobileActiveLink();
+        const navLinks = document.querySelectorAll('.header__nav__link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(event) {
+                if (this.getAttribute('href') === '#') {
+                    event.preventDefault();
+                }
+                navLinks.forEach(item => {
+                    item.classList.remove('active');
+                });
+                this.classList.add('active');
+            });
+        });
+        function setActiveLinkOnLoad() {
+            const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                const linkPath = link.getAttribute('href').split('/').pop();
+                if (linkPath === currentPath) {
+                    link.classList.add('active');
+                }
+            });
+            if (currentPath === '' || currentPath === 'index.html') {
+                document.querySelector('.header__nav a[href="./index.html"]').classList.add('active');
+            }
+        }
+        setActiveLinkOnLoad();
+        const toggleBtn = document.querySelector('.js-theme-toggle');
+        const body = document.body;
+        const moonIcon = document.getElementById('moon-icon');
+        const sunIcon = document.getElementById('sun-icon');
+        function setTheme(isDark, animate = true) {
+            if (isDark) {
+                body.classList.add('dark-mode');
+                if (animate) {
+                    moonIcon.style.opacity = 0;
+                    setTimeout(() => {
+                        moonIcon.classList.add('hidden');
+                        sunIcon.classList.remove('hidden');
+                        sunIcon.style.opacity = 1;
+                    }, 300);
+                } else {
+                    moonIcon.classList.add('hidden');
+                    sunIcon.classList.remove('hidden');
+                }  
+            } else {
+                body.classList.remove('dark-mode');
+                if (animate) {
+                    sunIcon.style.opacity = 0;
+                    setTimeout(() => {
+                        sunIcon.classList.add('hidden');
+                        moonIcon.classList.remove('hidden');
+                        moonIcon.style.opacity = 1;
+                    }, 300);
+                } else {
+                    sunIcon.classList.add('hidden');
+                    moonIcon.classList.remove('hidden');
+                }
+            }
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        }
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        
+        let initialDarkState = (savedTheme === 'dark' || (savedTheme === null && prefersDark));
+        setTheme(initialDarkState, false);
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const isCurrentlyDark = body.classList.contains('dark-mode');
+                setTheme(!isCurrentlyDark, true);
+            });
+        }
+    });
+</script>

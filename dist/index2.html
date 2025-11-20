@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <title>О нас | Фолиант</title>
+</head>
+<body>
+    <header class="header">
+    <div class="header__logo">
+        <svg width="64" height="60" viewBox="0 0 64 60" fill="none" xmlns="http://www.w3.org/2000/svg" class="footer__logo__img">
+                    <path d="M32.2136 19.5641C37.7135 19.5641 42.1533 15.1773 42.1533 9.76909C42.1533 4.37182 37.7149 0 32.2136 0C26.7206 0 22.2614 4.37318 22.2614 9.76909C22.2614 15.1759 26.722 19.5641 32.2136 19.5641ZM41.8847 21.8182C46.4358 21.8182 48.3461 25.6282 48.3461 25.6282L63.0344 45.4623C63.6424 46.3473 64 47.43 64 48.5986C64 51.6805 61.4566 54.1855 58.322 54.1855C57.572 54.1855 56.8458 54.0259 56.2085 53.7832L47.304 51.3641V60H16.6946V51.3641L7.7873 53.7873C7.1612 54.0273 6.44049 54.1909 5.68778 54.1909C2.55588 54.1909 0 51.6955 0 48.6136C0 47.4464 0.352008 46.3814 0.982282 45.4936L15.6609 25.6282C15.6609 25.6282 17.5698 21.8182 22.1014 21.8182H41.8847ZM32.0077 53.9836L43.4806 50.2473L43.2316 50.1791C35.294 47.8991 38.3368 37.5955 46.2549 39.9014L47.304 40.2668V28.6473L32.0146 33.5877L16.6946 28.6473V40.2668L17.7437 39.9C25.6576 37.5955 28.7325 47.8977 20.8005 50.1777L20.5222 50.2459L32.0077 53.9836Z" fill="currentColor"/>
+                </svg>
+        <a href="./index.html"><span class="header__logo__title">Фолиант</span></a>
+    </div>
+    <nav class="header__nav">
+        <a href="./index.html" class="header__nav__link active header__navig">Главная</a>
+        <a href="./index2.html" class="header__nav__link header__navig">О нас</a>
+        <a href="./index3.html" class="header__nav__link header__navig">Контакты</a>
+        <a href="#" class="header__nav__link header__navig">Корзина</a>
+        <a href="#" class="header__nav__link header__navig">Профиль</a>
+    </nav>
+    <div class="header__img">
+    <a href="#" class="header__nav__link" id="header__burger">☰</a>
+    <a href="#" class="js-theme-toggle">
+        <img src="./assets/images/moon.webp" id="moon-icon" class="header__img__img" alt="Переключить на темную тему">
+        <img src="./assets/images/sun.webp" id="sun-icon" class="header__img__img hidden" alt="Переключить на светлую тему">
+    </a>
+</div>
+</header>
+<div id="mobile-menu" class="mobile-menu">
+    <div class="mobile-menu__overlay"></div>
+    <div class="mobile-menu__content">
+        <div class="mobile-menu__header">
+            <span class="mobile-menu__title">Меню</span>
+            <button class="mobile-menu__close-btn">&times;</button>
+        </div>
+        <nav class="mobile-menu__nav">
+            <a href="./index.html" class="mobile-menu__link">Главная</a>
+            <a href="./index2.html" class="mobile-menu__link">О нас</a>
+            <a href="./index3.html" class="mobile-menu__link">Контакты</a>
+            <a href="#" class="mobile-menu__link">Корзина</a>
+            <a href="#" class="mobile-menu__link">Профиль</a>
+        </nav>
+        
+        <div class="mobile-menu__footer">
+            <p>Фолиант &copy; 2024</p>
+        </div>
+    </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const burgerBtn = document.getElementById('header__burger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileMenuCloseBtn = mobileMenu.querySelector('.mobile-menu__close-btn');
+    const mobileMenuOverlay = mobileMenu.querySelector('.mobile-menu__overlay');
+    const mobileLinks = mobileMenu.querySelectorAll('.mobile-menu__link');
+
+    // Функция открытия меню
+    function openMobileMenu(e) {
+        e.preventDefault();
+        mobileMenu.classList.add('is-open');
+        document.body.style.overflow = 'hidden'; // Блокируем скролл сайта
+    }
+
+    // Функция закрытия меню
+    function closeMobileMenu() {
+        mobileMenu.classList.remove('is-open');
+        document.body.style.overflow = ''; // Возвращаем скролл
+    }
+
+    // Слушатели событий
+    if (burgerBtn) {
+        burgerBtn.addEventListener('click', openMobileMenu);
+    }
+    
+    if (mobileMenuCloseBtn) {
+        mobileMenuCloseBtn.addEventListener('click', closeMobileMenu);
+    }
+    
+    if (mobileMenuOverlay) {
+        mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+    }
+
+    // --- СИНХРОНИЗАЦИЯ АКТИВНОЙ ССЫЛКИ ДЛЯ МОБИЛЬНОГО МЕНЮ ---
+    
+    function setMobileActiveLink() {
+        const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+        
+        mobileLinks.forEach(link => {
+            link.classList.remove('active');
+            // Закрываем меню при клике на ссылку
+            link.addEventListener('click', () => {
+                 // Если ссылка ведет на якорь или другую страницу, меню закроется
+                 closeMobileMenu();
+            });
+
+            const linkPath = link.getAttribute('href').split('/').pop();
+            if (linkPath === currentPath) {
+                link.classList.add('active');
+            }
+        });
+        if (currentPath === '' || currentPath === 'index.html') {
+            const homeLink = document.querySelector('.mobile-menu__link[href="./index.html"]');
+            if(homeLink) homeLink.classList.add('active');
+        }
+    }
+    setMobileActiveLink();
+        const navLinks = document.querySelectorAll('.header__nav__link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(event) {
+                if (this.getAttribute('href') === '#') {
+                    event.preventDefault();
+                }
+                navLinks.forEach(item => {
+                    item.classList.remove('active');
+                });
+                this.classList.add('active');
+            });
+        });
+        function setActiveLinkOnLoad() {
+            const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                const linkPath = link.getAttribute('href').split('/').pop();
+                if (linkPath === currentPath) {
+                    link.classList.add('active');
+                }
+            });
+            if (currentPath === '' || currentPath === 'index.html') {
+                document.querySelector('.header__nav a[href="./index.html"]').classList.add('active');
+            }
+        }
+        setActiveLinkOnLoad();
+        const toggleBtn = document.querySelector('.js-theme-toggle');
+        const body = document.body;
+        const moonIcon = document.getElementById('moon-icon');
+        const sunIcon = document.getElementById('sun-icon');
+        function setTheme(isDark, animate = true) {
+            if (isDark) {
+                body.classList.add('dark-mode');
+                if (animate) {
+                    moonIcon.style.opacity = 0;
+                    setTimeout(() => {
+                        moonIcon.classList.add('hidden');
+                        sunIcon.classList.remove('hidden');
+                        sunIcon.style.opacity = 1;
+                    }, 300);
+                } else {
+                    moonIcon.classList.add('hidden');
+                    sunIcon.classList.remove('hidden');
+                }  
+            } else {
+                body.classList.remove('dark-mode');
+                if (animate) {
+                    sunIcon.style.opacity = 0;
+                    setTimeout(() => {
+                        sunIcon.classList.add('hidden');
+                        moonIcon.classList.remove('hidden');
+                        moonIcon.style.opacity = 1;
+                    }, 300);
+                } else {
+                    sunIcon.classList.add('hidden');
+                    moonIcon.classList.remove('hidden');
+                }
+            }
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        }
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        
+        let initialDarkState = (savedTheme === 'dark' || (savedTheme === null && prefersDark));
+        setTheme(initialDarkState, false);
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const isCurrentlyDark = body.classList.contains('dark-mode');
+                setTheme(!isCurrentlyDark, true);
+            });
+        }
+    });
+</script>
+    <main class="about-page-main">
+        <section class="about-hero">
+            <div class="about-hero__text-content">
+                <h1 class="about-hero__title">О нас: где рождаются ваши любимые истории</h1>
+                <h2 class="about-hero__subtitle">«Фолиант» — больше, чем просто книжный магазин</h2>
+                <p class="about-hero__mission-text">
+                    Наша миссия — создать идеальную среду, где каждый ценитель литературы сможет найти вдохновение, знание и отдых. Мы тщательно отбираем каждую книгу, чтобы вы тратили время только на чтение, а не на поиск
+                </p>
+                <p class="about-hero__quote">
+                    &laquo;Книга – это не просто бумага. Это портал. Мы заботимся о том, чтобы ваш портал всегда был открыт&raquo;
+                </p>
+            </div>
+            <div class="about-hero__image">
+                <img src="./assets/images/about-us-hero.webp" alt="Изображение уютного книжного магазина 'Фолиант'">
+            </div>
+        </section>
+        <section class="principles-section">
+            <h2 class="principles__heading">Наши принципы работы</h2>
+            <div class="principles__grid">
+                <div class="principle-card">
+                    <span class="principle-card__icon">★</span>
+                    <h3 class="principle-card__title">Тщательный отбор</h3>
+                    <p class="principle-card__description">Мы не гонимся за количеством. Каждая книга в нашем каталоге — это осознанный выбор нашей команды экспертов и преданных читателей.
+                </p></div>
+                <div class="principle-card">
+                    <span class="principle-card__icon">🎁</span>
+                    <h3 class="principle-card__title">Сервис, как искусство</h3>
+                    <p class="principle-card__description">Мы ценим ваше время. Уютный магазин, быстрая доставка, персонализированные рекомендации и внимательное отношение к каждому запросу.</p>
+                </div>
+                <div class="principle-card">
+                    <span class="principle-card__icon">🌱</span>
+                    <h3 class="principle-card__title">Любовь к печати</h3>
+                    <p class="principle-card__description">Мы уважаем традицию. Предлагаем лучшее качество переплёта и печати, поддерживая издателей, которые разделяют нашу страсть к книгам.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="team-section">
+            <h2 class="team-section__heading">Команда, которая читает</h2>
+            <p class="team-section__intro">Познакомьтесь с теми, кто наполняет "Фолиант" душой и заботится о вашем следующем чтении.</p>
+
+            <div class="team-card">
+    <img src="./assets/images/team-alex.webp" alt="Фотография члена команды Александр Смирнов" class="team-card__photo">
+    <div class="team-card__info">
+        <h4 class="team-card__name">Александр Смирнов</h4>
+        <span class="team-card__role">Основатель и Главный Книголюб</span> 
+        <p class="team-card__bio">Начинал с небольшого букинистического прилавка. Вдохновитель миссии 'Фолианта'. Читает всё: от древнегреческой философии до современной фантастики.</p>
+    </div>
+</div>
+            
+            <div class="team-card">
+    <img src="./assets/images/team-anna.webp" alt="Фотография члена команды Анна Иванова" class="team-card__photo">
+    <div class="team-card__info">
+        <h4 class="team-card__name">Анна Иванова</h4>
+        <span class="team-card__role">Менеджер по ассортименту и эксперт по новинкам</span> 
+        <p class="team-card__bio">Всегда в курсе книжных трендов. Именно она находит те самые редкие издания, которые вы не найдёте больше нигде. Специализируется на non-fiction.</p>
+    </div>
+</div>
+
+            <div class="team-card">
+    <img src="./assets/images/team-maxim.webp" alt="Фотография члена команды Максим Петров" class="team-card__photo">
+    <div class="team-card__info">
+        <h4 class="team-card__name">Максим Петров</h4>
+        <span class="team-card__role">Старший консультант и историк литературы</span> 
+        <p class="team-card__bio">Мастер по подбору книг по настроению и случаю. Если у вас есть вопрос о классике или редком авторе – Максим знает ответ. Его страсть – романы XIX века.</p>
+    </div>
+</div>
+            
+        </section>
+        <section class="awards-section">
+            <h2 class="awards-section__heading">Стена Наследия и Признания</h2>
+            <p class="awards-section__intro">Мы гордимся тем, что нашу любовь к книгам и сервису ценят эксперты и читатели</p>
+
+            <div class="awards-grid"> 
+                
+                <div class="award-item" data-award-id="1">
+                    <img src="./assets/images/award1.svg" alt="Награда за лучший сервис" class="award-item__image">
+                    <h4 class="award-item__title">Лучший сервис 2024</h4>
+                    <p class="award-item__description">Признание от гильдии продавцов книг за выдающееся качество обслуживания</p>
+                    <button class="award-item__details-btn">Подробнее</button> 
+                </div>               
+                <div class="award-item" data-award-id="2">
+                    <img src="./assets/images/award2.svg" alt="Награда за вклад в местную культуру" class="award-item__image">
+                    <h4 class="award-item__title">Культурный герой Нижнего Новгорода</h4>
+                    <p class="award-item__description">Присуждена мэрией города за вклад в развитие местной литературы</p>
+                    <button class="award-item__details-btn">Подробнее</button>
+                </div>              
+                <div class="award-item" data-award-id="3">
+                    <img src="./assets/images/award3.svg" alt="Выбор читателей" class="award-item__image">
+                    <h4 class="award-item__title">Выбор читателей</h4>
+                    <p class="award-item__description">Самая ценная награда, полученная по результатам голосования постоянных покупателей различной литературы</p>
+                    <button class="award-item__details-btn">Подробнее</button>
+                </div>                
+                <div class="award-item" data-award-id="4">
+                    <img src="./assets/images/award4.svg" alt="Награда за инновации" class="award-item__image">
+                    <h4 class="award-item__title">Инновационный подход</h4>
+                    <p class="award-item__description">Отмечены за самые современные подходы к онлайн-торговле книгами и сервису.</p>
+                    <button class="award-item__details-btn">Подробнее</button>
+                </div>
+            </div>
+        </section>
+    </main>
+    <div id="award-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+         <div class="modal-content">
+            <span class="modal-close-btn">&times;</span>
+            <h4 id="modal-title" class="modal__title"></h4>
+            <p class="modal__text"></p>
+            <p class="modal__footer">Благодарим вас за то, что вы цените нашу работу! Ваш "Фолиант".</p>
+        </div>
+</div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const modal = document.getElementById("award-modal");
+            const closeBtn = modal.querySelector(".modal-close-btn");
+            const overlay = modal.querySelector(".modal-overlay");
+            const modalTitle = modal.querySelector(".modal__title");
+            const modalText = modal.querySelector(".modal__text");
+            // Находим все кнопки "Подробнее"
+            const detailButtons = document.querySelectorAll(".award-item__details-btn");
+
+            // Данные наград
+            const awardDetails = {
+                "1": {
+                    title: "🏆 Награда: Лучший сервис 2024",
+                    text: "Эта награда подтверждает, что мы ценим ваше время. Быстрая доставка и внимательное отношение - наш приоритет."
+                },
+                "2": {
+                    title: "🏛️ Награда: Культурный герой Нижнего Новгорода 2023",
+                    text: "Присуждена мэрией за развитие чтения в городе. Мы проводим лекции, встречи с авторами и поддерживаем начинающие таланты."
+                },
+                "3": {
+                    title: "💖 Награда: Выбор Читателей",
+                    text: "Самая ценная для нас награда. Спасибо, что голосуете за нас рублем и сердцем!"
+                },
+                "4": {
+                    title: "💡 Награда: Инновационный Подход",
+                    text: "За использование ИИ в подборе книг и удобный сайт. Технологии на службе литературы!"
+                }
+            };
+            // Функция открытия
+            function openModal(id) {
+                const data = awardDetails[id];
+                if (data) {
+                    modalTitle.textContent = data.title;
+                    modalText.textContent = data.text;
+                    modal.classList.add("is-open");
+                    document.body.style.overflow = 'hidden';
+                }
+            }
+            // Функция закрытия
+            function closeModal() {
+                modal.classList.remove("is-open");
+                document.body.style.overflow = '';
+            }
+
+            // Функция для вешания клика на кнопку
+            detailButtons.forEach(btn => {
+                btn.addEventListener("click", (e) => {
+                    const card = e.target.closest(".award-item");
+                    const id = card.getAttribute("data-award-id");
+                    openModal(id);
+                });
+            });
+            closeBtn.addEventListener("click", closeModal);
+        });
+    </script>
+    <footer class="footer">        
+        <div class="footer__block footer__logo-block">
+            <div class="footer__logo">
+                <svg width="64" height="60" viewBox="0 0 64 60" fill="none" xmlns="http://www.w3.org/2000/svg" class="footer__logo__img">
+                    <path d="M32.2136 19.5641C37.7135 19.5641 42.1533 15.1773 42.1533 9.76909C42.1533 4.37182 37.7149 0 32.2136 0C26.7206 0 22.2614 4.37318 22.2614 9.76909C22.2614 15.1759 26.722 19.5641 32.2136 19.5641ZM41.8847 21.8182C46.4358 21.8182 48.3461 25.6282 48.3461 25.6282L63.0344 45.4623C63.6424 46.3473 64 47.43 64 48.5986C64 51.6805 61.4566 54.1855 58.322 54.1855C57.572 54.1855 56.8458 54.0259 56.2085 53.7832L47.304 51.3641V60H16.6946V51.3641L7.7873 53.7873C7.1612 54.0273 6.44049 54.1909 5.68778 54.1909C2.55588 54.1909 0 51.6955 0 48.6136C0 47.4464 0.352008 46.3814 0.982282 45.4936L15.6609 25.6282C15.6609 25.6282 17.5698 21.8182 22.1014 21.8182H41.8847ZM32.0077 53.9836L43.4806 50.2473L43.2316 50.1791C35.294 47.8991 38.3368 37.5955 46.2549 39.9014L47.304 40.2668V28.6473L32.0146 33.5877L16.6946 28.6473V40.2668L17.7437 39.9C25.6576 37.5955 28.7325 47.8977 20.8005 50.1777L20.5222 50.2459L32.0077 53.9836Z"/>
+                </svg>
+                <a href="./index.html"><span class="footer__logo__title">Фолиант</span></a>
+            </div>
+            <p class="footer__copyright">
+                © 2025, ФОЛИАНТ. Все права защищены.
+            </p>
+        </div>
+        <div class="footer__block footer__links-group">
+            <span class="footer__title">Интернет-магазин</span>
+            <ul class="footer__list">
+                <li class="footer__list__item"><a href="#" class="footer__list__link">Акции</a></li>
+                <li class="footer__list__item"><a href="#" class="footer__list__link">Распродажа</a></li>
+                <li class="footer__list__item"><a href="#" class="footer__list__link">Доставка и оплата</a></li>
+                <li class="footer__list__item"><a href="#" class="footer__list__link">Программа лояльности</a></li>
+                <li class="footer__list__item"><a href="#" class="footer__list__link">Подарочные сертификаты</a></li>
+            </ul>
+        </div>
+        <div class="footer__block footer__links-group footer__contacts">
+            <span class="footer__title">Контакты</span>
+            <ul class="footer__list">
+                <li class="footer__list__item"><a href="#" class="footer__list__link">Мы в соцсетях</a></li>
+                <li class="footer__list__item">
+                    <span class="footer__contact-label">Наша почта:</span>
+                    <a href="mailto:foliant@gmail.com" class="footer__list__link">foliant@gmail.com</a>
+                </li>
+                <li class="footer__list__item">
+                    <span class="footer__contact-label">Номер тех. поддержки:</span>
+                    <a href="tel:89501414444" class="footer__list__link">8 950 141-44-44</a>
+                </li>
+            </ul>
+        </div>
+        <div class="footer__block footer__links-group">
+            <span class="footer__title">Важные ссылки</span>
+            <ul class="footer__list">
+                <li class="footer__list__item"><a href="#" class="footer__list__link">Политика конфиденциальности</a></li>
+                <li class="footer__list__item"><a href="#" class="footer__list__link">FAQs</a></li>
+                <li class="footer__list__item"><a href="#" class="footer__list__link">Условия использования</a></li>
+            </ul>
+        </div>
+</footer>
+</body>
+</html>

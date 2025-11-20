@@ -1,0 +1,81 @@
+.container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: var(--base-gap) var(--container-padding-x);
+    background-color: var(--color-bg-card);
+    box-shadow: 0 0 10px var(--shadow-text-soft);
+}
+.welcome-message {
+    flex: 1;
+    padding: 20px;
+}
+.welcome-message h2 {
+    background-color: var(--color-primary); 
+    padding: var(--base-gap) 20px;
+    border-radius: 0 30px 0 30px;
+    color: var(--color-text-inverse);    
+    text-align: center;
+    margin-bottom: var(--base-gap);
+}
+.welcome-message p,
+.welcome-message ul,
+.welcome-message ul li {
+    margin-bottom: var(--base-gap);
+    color: var(--color-text-main); 
+}
+.bookstore-image {
+    flex: 1;
+    padding: 20px;
+}
+.bookstore-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+@media (max-width: 1200px) {
+    
+    // Уменьшаем внутренние отступы, чтобы дать контенту больше места
+    .welcome-message,
+    .bookstore-image {
+        padding: 10px; 
+    }
+    
+    // Слегка уменьшаем отступы у заголовка
+    .welcome-message h2 {
+        padding: calc(var(--base-gap) / 1.5) 15px;
+    }
+    .welcome-message p,
+    .welcome-message ul,
+    .welcome-message ul li {
+        font-size: 16px; 
+    }
+}
+@media (max-width: 767px) {
+    .container {
+        flex-direction: column;
+
+        align-items: stretch; 
+        padding: calc(var(--base-gap) / 2) var(--container-padding-x);
+    }
+    .welcome-message,
+    .bookstore-image {
+        flex: auto;
+        padding: 10px 0; 
+    }
+    .welcome-message h2 {
+        font-size: 1.5em; 
+        padding: calc(var(--base-gap) / 2) 10px;
+        margin-bottom: calc(var(--base-gap) / 2);
+        border-radius: 0 20px 0 20px; 
+    }
+    .welcome-message p,
+    .welcome-message ul,
+    .welcome-message ul li {
+        margin-bottom: calc(var(--base-gap) / 2);
+        font-size: 15px; 
+    }
+    .bookstore-image img {
+        border-radius: 6px;
+    }
+}

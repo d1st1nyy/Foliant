@@ -1,0 +1,192 @@
+.discount-promo {
+    --promo-padding: 60px; 
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    padding: var(--container-padding-y) 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.discount-promo__background-fill {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: var(--color-secondary);
+    border-radius: 50px;
+    z-index: 0;
+}
+.discount-promo__content-wrapper {
+    width: 100%;
+    
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    padding: var(--promo-padding);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    overflow: hidden;
+}
+.discount-promo__content {
+    flex: 0 0 65%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--base-gap);
+    z-index: 2;
+    margin-left: calc(-1 * var(--promo-padding) + var(--container-padding-x));
+}
+.discount-promo__title {
+    margin: 0;
+    color: var(--color-text-inverse);
+    background-color: var(--color-primary);
+    padding: var(--base-gap) var(--container-padding-x);
+    border-radius: 0 var(--base-gap) 0 var(--base-gap);
+    align-self: flex-start;
+}
+.discount-promo__description {
+    color: var(--color-text-inverse);
+    border-radius: var(--border-radius-default);
+    margin: 0;
+    background-color: var(--color-primary);
+    padding: var(--base-gap) var(--container-padding-x);
+    white-space: pre-line;
+}
+.discount-promo__form {
+    display: flex;
+    width: 100%;
+    margin-top: calc(var(--base-gap) / 2);
+}
+.discount-promo__input {
+    flex-grow: 1;
+    padding: 25px 10px;
+    border: none;
+    outline: none;
+    background-color: var(--color-bg-card);
+    border-radius: 40px 0 0 40px;
+    color: var(--color-text-main);
+}
+.discount-promo__button {
+    padding: 25px 10px;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+    color: var(--color-text-inverse);
+    background-color: var(--color-primary);
+    transition: background-color .2s ease;
+    border-radius: 0 40px 40px 0;
+}
+.discount-promo__button:hover {
+    background-color: var(--color-primary-hover);
+}
+.discount-promo__image-wrapper {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 60%;
+    width: 35%;
+}
+.discount-promo__image {
+    position: absolute;
+    left: 5px;
+    bottom: calc(-1 * var(--promo-padding) / 2);
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(var(--shadow-promo-full));
+    z-index: 1;
+    max-width: 100%;
+    mix-blend-mode: multiply;
+}
+@media (max-width: 1200px) {
+    .discount-promo {
+        --promo-padding: 40px;
+    }
+    .discount-promo__content {
+        flex: 0 0 70%;
+        margin-left: calc(-1 * var(--promo-padding) + var(--container-padding-x));
+    }   
+    .discount-promo__image-wrapper {
+        left: 60%; 
+        width: 30%; 
+    }
+    .discount-promo__input,
+    .discount-promo__button {
+        padding: 20px 10px; 
+    }   
+    .discount-promo__title {
+        font-size: 1.8em; 
+    }
+    .discount-promo__description {
+        font-size: 1em;
+    }
+}
+@media (max-width: 767px) {
+    .discount-promo {
+        width: 100%;
+        left: auto;
+        right: auto;
+        margin-left: 0;
+        margin-right: 0;
+        padding: calc(var(--container-padding-y) / 2) var(--container-padding-x); 
+    }
+    .discount-promo__background-fill {
+        border-radius: 10px;
+    }
+    .discount-promo__content-wrapper {
+        flex-direction: column; 
+        padding: 20px; 
+        overflow: visible;
+    }
+    .discount-promo__content {
+        flex: 1 1 100%;
+        margin-left: 0;
+        order: 1;
+        gap: calc(var(--base-gap) / 2);
+        padding-bottom: var(--base-gap);
+    }
+    .discount-promo__title,
+    .discount-promo__description {
+        align-self: stretch;
+        padding: calc(var(--base-gap) / 2) 10px;
+    }
+    .discount-promo__form {
+        flex-direction: column;
+    }
+    .discount-promo__input,
+    .discount-promo__button {
+        padding: 15px 10px;
+        width: 100%;
+        text-align: center;
+        border-radius: 30px; 
+    }
+    .discount-promo__input {
+        margin-bottom: 10px;
+    }
+    .discount-promo__button {
+        white-space: normal;
+        order: 2;
+    }
+    .discount-promo__image-wrapper {
+        position: static;
+        width: 100%;
+        height: auto;
+        order: 2;
+        margin-bottom: var(--base-gap);
+        display: flex;
+        justify-content: center;
+    }
+    .discount-promo__image {
+        position: static;
+        width: 60%;
+        height: auto;
+        bottom: auto;
+        left: auto;
+        object-fit: contain;
+    }
+}

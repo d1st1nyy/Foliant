@@ -1,0 +1,30 @@
+@font-face {
+  src: url('../fonts/Gothic60-Regular.woff2') format('woff2');
+  font-family: "Gothic №60";
+  font-style: normal;
+}
+*{
+  font-family: 'Inter';
+}
+a{
+  font-family: 'Gothic №60';
+  font-size: 22px;
+}
+h2{
+  font-family: 'Gothic №60';
+  font-size: 86px;
+}
+h3{
+  font-size: 50px;
+  font-family: 'Inter';
+}
+p{
+  font-size: 32px;
+}
+input{
+  font-size: 24px;
+  font-family: 'Inter';
+}
+button{
+  font-size: 24px;
+}

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/main.css"/>
+    <title>О нас | Фолиант</title>
+</head>
+<body>
+    @@include('../components/_header.html')
+    <main class="about-page-main">
+        <section class="about-hero">
+            <div class="about-hero__text-content">
+                <h1 class="about-hero__title">О нас: где рождаются ваши любимые истории</h1>
+                <h2 class="about-hero__subtitle">«Фолиант» — больше, чем просто книжный магазин</h2>
+                <p class="about-hero__mission-text">
+                    Наша миссия — создать идеальную среду, где каждый ценитель литературы сможет найти вдохновение, знание и отдых. Мы тщательно отбираем каждую книгу, чтобы вы тратили время только на чтение, а не на поиск
+                </p>
+                <p class="about-hero__quote">
+                    &laquo;Книга – это не просто бумага. Это портал. Мы заботимся о том, чтобы ваш портал всегда был открыт&raquo;
+                </p>
+            </div>
+            <div class="about-hero__image">
+                <img src="./assets/images/about-us-hero.webp" alt="Изображение уютного книжного магазина 'Фолиант'" />
+            </div>
+        </section>
+        <section class="principles-section">
+            <h2 class="principles__heading">Наши принципы работы</h2>
+            <div class="principles__grid">
+                <div class="principle-card">
+                    <span class="principle-card__icon">★</span>
+                    <h3 class="principle-card__title">Тщательный отбор</h3>
+                    <p class="principle-card__description">Мы не гонимся за количеством. Каждая книга в нашем каталоге — это осознанный выбор нашей команды экспертов и преданных читателей.</р>
+                </div>
+                <div class="principle-card">
+                    <span class="principle-card__icon">🎁</span>
+                    <h3 class="principle-card__title">Сервис, как искусство</h3>
+                    <p class="principle-card__description">Мы ценим ваше время. Уютный магазин, быстрая доставка, персонализированные рекомендации и внимательное отношение к каждому запросу.</p>
+                </div>
+                <div class="principle-card">
+                    <span class="principle-card__icon">🌱</span>
+                    <h3 class="principle-card__title">Любовь к печати</h3>
+                    <p class="principle-card__description">Мы уважаем традицию. Предлагаем лучшее качество переплёта и печати, поддерживая издателей, которые разделяют нашу страсть к книгам.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="team-section">
+            <h2 class="team-section__heading">Команда, которая читает</h2>
+            <p class="team-section__intro">Познакомьтесь с теми, кто наполняет "Фолиант" душой и заботится о вашем следующем чтении.</p>
+
+            @@include('../components/_team-card.html', {
+                "photo": "./assets/images/team-alex",
+                "name": "Александр Смирнов",
+                "role": "Основатель и Главный Книголюб",
+                "bio": "Начинал с небольшого букинистического прилавка. Вдохновитель миссии 'Фолианта'. Читает всё: от древнегреческой философии до современной фантастики."
+            })
+            
+            @@include('../components/_team-card.html', {
+                "photo": "./assets/images/team-anna",
+                "name": "Анна Иванова",
+                "role": "Менеджер по ассортименту и эксперт по новинкам",
+                "bio": "Всегда в курсе книжных трендов. Именно она находит те самые редкие издания, которые вы не найдёте больше нигде. Специализируется на non-fiction."
+            })
+
+            @@include('../components/_team-card.html', {
+                "photo": "./assets/images/team-maxim",
+                "name": "Максим Петров",
+                "role": "Старший консультант и историк литературы",
+                "bio": "Мастер по подбору книг по настроению и случаю. Если у вас есть вопрос о классике или редком авторе – Максим знает ответ. Его страсть – романы XIX века."
+            })
+            
+        </section>
+        <section class="awards-section">
+            <h2 class="awards-section__heading">Стена Наследия и Признания</h2>
+            <p class="awards-section__intro">Мы гордимся тем, что нашу любовь к книгам и сервису ценят эксперты и читатели</p>
+
+            <div class="awards-grid"> 
+                
+                <div class="award-item" data-award-id="1">
+                    <img src="./assets/images/award1.svg" alt="Награда за лучший сервис" class="award-item__image" />
+                    <h4 class="award-item__title">Лучший сервис 2024</h4>
+                    <p class="award-item__description">Признание от гильдии продавцов книг за выдающееся качество обслуживания</p>
+                    <button class="award-item__details-btn">Подробнее</button> 
+                </div>               
+                <div class="award-item" data-award-id="2">
+                    <img src="./assets/images/award2.svg" alt="Награда за вклад в местную культуру" class="award-item__image" />
+                    <h4 class="award-item__title">Культурный герой Нижнего Новгорода</h4>
+                    <p class="award-item__description">Присуждена мэрией города за вклад в развитие местной литературы</p>
+                    <button class="award-item__details-btn">Подробнее</button>
+                </div>              
+                <div class="award-item" data-award-id="3">
+                    <img src="./assets/images/award3.svg" alt="Выбор читателей" class="award-item__image" />
+                    <h4 class="award-item__title">Выбор читателей</h4>
+                    <p class="award-item__description">Самая ценная награда, полученная по результатам голосования постоянных покупателей различной литературы</p>
+                    <button class="award-item__details-btn">Подробнее</button>
+                </div>                
+                <div class="award-item" data-award-id="4">
+                    <img src="./assets/images/award4.svg" alt="Награда за инновации" class="award-item__image" />
+                    <h4 class="award-item__title">Инновационный подход</h4>
+                    <p class="award-item__description">Отмечены за самые современные подходы к онлайн-торговле книгами и сервису.</p>
+                    <button class="award-item__details-btn">Подробнее</button>
+                </div>
+            </div>
+        </section>
+    </main>
+    <div id="award-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+         <div class="modal-content">
+            <span class="modal-close-btn">&times;</span>
+            <h4 id="modal-title" class="modal__title"></h4>
+            <p class="modal__text"></p>
+            <p class="modal__footer">Благодарим вас за то, что вы цените нашу работу! Ваш "Фолиант".</p>
+        </div>
+</div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const modal = document.getElementById("award-modal");
+            const closeBtn = modal.querySelector(".modal-close-btn");
+            const overlay = modal.querySelector(".modal-overlay");
+            const modalTitle = modal.querySelector(".modal__title");
+            const modalText = modal.querySelector(".modal__text");
+            // Находим все кнопки "Подробнее"
+            const detailButtons = document.querySelectorAll(".award-item__details-btn");
+
+            // Данные наград
+            const awardDetails = {
+                "1": {
+                    title: "🏆 Награда: Лучший сервис 2024",
+                    text: "Эта награда подтверждает, что мы ценим ваше время. Быстрая доставка и внимательное отношение - наш приоритет."
+                },
+                "2": {
+                    title: "🏛️ Награда: Культурный герой Нижнего Новгорода 2023",
+                    text: "Присуждена мэрией за развитие чтения в городе. Мы проводим лекции, встречи с авторами и поддерживаем начинающие таланты."
+                },
+                "3": {
+                    title: "💖 Награда: Выбор Читателей",
+                    text: "Самая ценная для нас награда. Спасибо, что голосуете за нас рублем и сердцем!"
+                },
+                "4": {
+                    title: "💡 Награда: Инновационный Подход",
+                    text: "За использование ИИ в подборе книг и удобный сайт. Технологии на службе литературы!"
+                }
+            };
+            // Функция открытия
+            function openModal(id) {
+                const data = awardDetails[id];
+                if (data) {
+                    modalTitle.textContent = data.title;
+                    modalText.textContent = data.text;
+                    modal.classList.add("is-open");
+                    document.body.style.overflow = 'hidden';
+                }
+            }
+            // Функция закрытия
+            function closeModal() {
+                modal.classList.remove("is-open");
+                document.body.style.overflow = '';
+            }
+
+            // Функция для вешания клика на кнопку
+            detailButtons.forEach(btn => {
+                btn.addEventListener("click", (e) => {
+                    const card = e.target.closest(".award-item");
+                    const id = card.getAttribute("data-award-id");
+                    openModal(id);
+                });
+            });
+            closeBtn.addEventListener("click", closeModal);
+        });
+    </script>
+    @@include('../components/_footer.html')
+</body>
+</html>
