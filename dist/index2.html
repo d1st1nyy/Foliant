@@ -56,46 +56,32 @@
     const mobileMenuCloseBtn = mobileMenu.querySelector('.mobile-menu__close-btn');
     const mobileMenuOverlay = mobileMenu.querySelector('.mobile-menu__overlay');
     const mobileLinks = mobileMenu.querySelectorAll('.mobile-menu__link');
-
-    // Функция открытия меню
     function openMobileMenu(e) {
         e.preventDefault();
         mobileMenu.classList.add('is-open');
-        document.body.style.overflow = 'hidden'; // Блокируем скролл сайта
+        document.body.style.overflow = 'hidden';
     }
-
-    // Функция закрытия меню
     function closeMobileMenu() {
         mobileMenu.classList.remove('is-open');
-        document.body.style.overflow = ''; // Возвращаем скролл
+        document.body.style.overflow = '';
     }
-
-    // Слушатели событий
     if (burgerBtn) {
         burgerBtn.addEventListener('click', openMobileMenu);
     }
-    
     if (mobileMenuCloseBtn) {
         mobileMenuCloseBtn.addEventListener('click', closeMobileMenu);
     }
-    
     if (mobileMenuOverlay) {
         mobileMenuOverlay.addEventListener('click', closeMobileMenu);
     }
-
-    // --- СИНХРОНИЗАЦИЯ АКТИВНОЙ ССЫЛКИ ДЛЯ МОБИЛЬНОГО МЕНЮ ---
-    
     function setMobileActiveLink() {
         const currentPath = window.location.pathname.split('/').pop() || 'index.html';
-        
+
         mobileLinks.forEach(link => {
             link.classList.remove('active');
-            // Закрываем меню при клике на ссылку
             link.addEventListener('click', () => {
-                 // Если ссылка ведет на якорь или другую страницу, меню закроется
                  closeMobileMenu();
             });
-
             const linkPath = link.getAttribute('href').split('/').pop();
             if (linkPath === currentPath) {
                 link.classList.add('active');
@@ -217,11 +203,9 @@
                 </div>
             </div>
         </section>
-        
         <section class="team-section">
             <h2 class="team-section__heading">Команда, которая читает</h2>
             <p class="team-section__intro">Познакомьтесь с теми, кто наполняет "Фолиант" душой и заботится о вашем следующем чтении.</p>
-
             <div class="team-card">
     <img src="./assets/images/team-alex.webp" alt="Фотография члена команды Александр Смирнов" class="team-card__photo">
     <div class="team-card__info">
@@ -230,7 +214,6 @@
         <p class="team-card__bio">Начинал с небольшого букинистического прилавка. Вдохновитель миссии 'Фолианта'. Читает всё: от древнегреческой философии до современной фантастики.</p>
     </div>
 </div>
-            
             <div class="team-card">
     <img src="./assets/images/team-anna.webp" alt="Фотография члена команды Анна Иванова" class="team-card__photo">
     <div class="team-card__info">
@@ -239,7 +222,6 @@
         <p class="team-card__bio">Всегда в курсе книжных трендов. Именно она находит те самые редкие издания, которые вы не найдёте больше нигде. Специализируется на non-fiction.</p>
     </div>
 </div>
-
             <div class="team-card">
     <img src="./assets/images/team-maxim.webp" alt="Фотография члена команды Максим Петров" class="team-card__photo">
     <div class="team-card__info">
@@ -248,14 +230,11 @@
         <p class="team-card__bio">Мастер по подбору книг по настроению и случаю. Если у вас есть вопрос о классике или редком авторе – Максим знает ответ. Его страсть – романы XIX века.</p>
     </div>
 </div>
-            
         </section>
         <section class="awards-section">
             <h2 class="awards-section__heading">Стена Наследия и Признания</h2>
             <p class="awards-section__intro">Мы гордимся тем, что нашу любовь к книгам и сервису ценят эксперты и читатели</p>
-
-            <div class="awards-grid"> 
-                
+            <div class="awards-grid">
                 <div class="award-item" data-award-id="1">
                     <img src="./assets/images/award1.svg" alt="Награда за лучший сервис" class="award-item__image">
                     <h4 class="award-item__title">Лучший сервис 2024</h4>
@@ -295,13 +274,9 @@
         document.addEventListener("DOMContentLoaded", () => {
             const modal = document.getElementById("award-modal");
             const closeBtn = modal.querySelector(".modal-close-btn");
-            const overlay = modal.querySelector(".modal-overlay");
             const modalTitle = modal.querySelector(".modal__title");
             const modalText = modal.querySelector(".modal__text");
-            // Находим все кнопки "Подробнее"
             const detailButtons = document.querySelectorAll(".award-item__details-btn");
-
-            // Данные наград
             const awardDetails = {
                 "1": {
                     title: "🏆 Награда: Лучший сервис 2024",
@@ -320,7 +295,6 @@
                     text: "За использование ИИ в подборе книг и удобный сайт. Технологии на службе литературы!"
                 }
             };
-            // Функция открытия
             function openModal(id) {
                 const data = awardDetails[id];
                 if (data) {
@@ -330,13 +304,10 @@
                     document.body.style.overflow = 'hidden';
                 }
             }
-            // Функция закрытия
             function closeModal() {
                 modal.classList.remove("is-open");
                 document.body.style.overflow = '';
             }
-
-            // Функция для вешания клика на кнопку
             detailButtons.forEach(btn => {
                 btn.addEventListener("click", (e) => {
                     const card = e.target.closest(".award-item");

@@ -44,39 +44,32 @@
                 </div>
             </div>
         </section>
-        
         <section class="team-section">
             <h2 class="team-section__heading">Команда, которая читает</h2>
             <p class="team-section__intro">Познакомьтесь с теми, кто наполняет "Фолиант" душой и заботится о вашем следующем чтении.</p>
-
             @@include('../components/_team-card.html', {
                 "photo": "./assets/images/team-alex",
                 "name": "Александр Смирнов",
                 "role": "Основатель и Главный Книголюб",
                 "bio": "Начинал с небольшого букинистического прилавка. Вдохновитель миссии 'Фолианта'. Читает всё: от древнегреческой философии до современной фантастики."
             })
-            
             @@include('../components/_team-card.html', {
                 "photo": "./assets/images/team-anna",
                 "name": "Анна Иванова",
                 "role": "Менеджер по ассортименту и эксперт по новинкам",
                 "bio": "Всегда в курсе книжных трендов. Именно она находит те самые редкие издания, которые вы не найдёте больше нигде. Специализируется на non-fiction."
             })
-
             @@include('../components/_team-card.html', {
                 "photo": "./assets/images/team-maxim",
                 "name": "Максим Петров",
                 "role": "Старший консультант и историк литературы",
                 "bio": "Мастер по подбору книг по настроению и случаю. Если у вас есть вопрос о классике или редком авторе – Максим знает ответ. Его страсть – романы XIX века."
             })
-            
         </section>
         <section class="awards-section">
             <h2 class="awards-section__heading">Стена Наследия и Признания</h2>
             <p class="awards-section__intro">Мы гордимся тем, что нашу любовь к книгам и сервису ценят эксперты и читатели</p>
-
-            <div class="awards-grid"> 
-                
+            <div class="awards-grid">
                 <div class="award-item" data-award-id="1">
                     <img src="./assets/images/award1.svg" alt="Награда за лучший сервис" class="award-item__image" />
                     <h4 class="award-item__title">Лучший сервис 2024</h4>
@@ -116,13 +109,9 @@
         document.addEventListener("DOMContentLoaded", () => {
             const modal = document.getElementById("award-modal");
             const closeBtn = modal.querySelector(".modal-close-btn");
-            const overlay = modal.querySelector(".modal-overlay");
             const modalTitle = modal.querySelector(".modal__title");
             const modalText = modal.querySelector(".modal__text");
-            // Находим все кнопки "Подробнее"
             const detailButtons = document.querySelectorAll(".award-item__details-btn");
-
-            // Данные наград
             const awardDetails = {
                 "1": {
                     title: "🏆 Награда: Лучший сервис 2024",
@@ -141,7 +130,6 @@
                     text: "За использование ИИ в подборе книг и удобный сайт. Технологии на службе литературы!"
                 }
             };
-            // Функция открытия
             function openModal(id) {
                 const data = awardDetails[id];
                 if (data) {
@@ -151,13 +139,10 @@
                     document.body.style.overflow = 'hidden';
                 }
             }
-            // Функция закрытия
             function closeModal() {
                 modal.classList.remove("is-open");
                 document.body.style.overflow = '';
             }
-
-            // Функция для вешания клика на кнопку
             detailButtons.forEach(btn => {
                 btn.addEventListener("click", (e) => {
                     const card = e.target.closest(".award-item");

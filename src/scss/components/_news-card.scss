@@ -145,37 +145,26 @@
     }
 }
 @media (max-width: 767px) {
-    // *** 767px: Переход на 2 колонки (для планшетов в портретном режиме) ***
-    
     .latest-news__content {
-        // Меняем на flex-wrap, чтобы карточки переносились
         flex-wrap: wrap;
-        justify-content: space-around; // Выравнивание по центру
-        gap: var(--base-gap); // Добавляем вертикальный зазор
+        justify-content: space-around;
+        gap: var(--base-gap);
         margin-bottom: var(--base-gap);
     }
-    
     .news-card {
-        // 2 колонки: каждая занимает почти 50%
         flex: 0 0 calc(50% - var(--base-gap) / 2); 
-        margin-right: 0; // Убираем жесткий margin-right
-        margin-bottom: var(--base-gap); // Добавляем margin-bottom для разделения рядов
+        margin-right: 0;
+        margin-bottom: var(--base-gap);
     }
-    
     .news-card:nth-child(3n) {
-        margin-right: 0; // Отключаем правило 3n
+        margin-right: 0;
     }
-    
-    // Уменьшаем шрифты еще больше
     .news-card__description {
         font-size: 18px;
     }
-    
     .news-card__date {
         font-size: 14px;
     }
-
-    // Упрощаем кнопку
     .latest-news__btn-primary {
         font-size: 20px;
         padding: 10px 20px;
@@ -197,7 +186,6 @@
         margin-right: 0; 
         margin-bottom: var(--base-gap); 
     }
-
     .news-card:nth-child(3n) {
         margin-right: 0;
     }
@@ -211,7 +199,6 @@
     .news-card__description {
         font-size: 18px;
     }
-
     .news-card__date {
         font-size: 14px;
     }

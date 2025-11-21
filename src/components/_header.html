@@ -47,46 +47,32 @@
     const mobileMenuCloseBtn = mobileMenu.querySelector('.mobile-menu__close-btn');
     const mobileMenuOverlay = mobileMenu.querySelector('.mobile-menu__overlay');
     const mobileLinks = mobileMenu.querySelectorAll('.mobile-menu__link');
-
-    // Функция открытия меню
     function openMobileMenu(e) {
         e.preventDefault();
         mobileMenu.classList.add('is-open');
-        document.body.style.overflow = 'hidden'; // Блокируем скролл сайта
+        document.body.style.overflow = 'hidden';
     }
-
-    // Функция закрытия меню
     function closeMobileMenu() {
         mobileMenu.classList.remove('is-open');
-        document.body.style.overflow = ''; // Возвращаем скролл
+        document.body.style.overflow = '';
     }
-
-    // Слушатели событий
     if (burgerBtn) {
         burgerBtn.addEventListener('click', openMobileMenu);
     }
-    
     if (mobileMenuCloseBtn) {
         mobileMenuCloseBtn.addEventListener('click', closeMobileMenu);
     }
-    
     if (mobileMenuOverlay) {
         mobileMenuOverlay.addEventListener('click', closeMobileMenu);
     }
-
-    // --- СИНХРОНИЗАЦИЯ АКТИВНОЙ ССЫЛКИ ДЛЯ МОБИЛЬНОГО МЕНЮ ---
-    
     function setMobileActiveLink() {
         const currentPath = window.location.pathname.split('/').pop() || 'index.html';
-        
+
         mobileLinks.forEach(link => {
             link.classList.remove('active');
-            // Закрываем меню при клике на ссылку
             link.addEventListener('click', () => {
-                 // Если ссылка ведет на якорь или другую страницу, меню закроется
                  closeMobileMenu();
             });
-
             const linkPath = link.getAttribute('href').split('/').pop();
             if (linkPath === currentPath) {
                 link.classList.add('active');
